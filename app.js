@@ -16,11 +16,17 @@ app.use(bodyParser.json());
 
 // Handle POST request
 app.post('/data', async (req, res) => {
-    let data = await req.json();
+    let data = await req.body;
     console.log("Received state: "+ data.state); // Log the request body to the console
 
 
-    res.status(200).send('Data received');
+    res.status(200).send(
+      JSON.stringify({
+          state: data.state,
+          status: "success",
+          message: "Data received",
+      })
+    );
 });
 
 // Start the server
